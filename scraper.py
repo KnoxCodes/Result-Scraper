@@ -15,32 +15,33 @@ import time
 
 
 def get_cgpa(roll_no, year):
-    # Headless browser setup
+
     chrome_options = Options()
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--disable-dev-shm-usage')
     
-    driver = webdriver.Chrome(options=chrome_options)
+    service = Service('/usr/local/bin/chromedriver')
+    driver = webdriver.Chrome(service=service, options=chrome_options)
 
     try:
-        # 1. Open result page
-        driver.get(f"http://results.nith.ac.in/scheme{year}/studentresult/index.asp")  # Replace with correct result URL
+        
+        driver.get(f"http://results.nith.ac.in/scheme{year}/studentresult/index.asp")
 
-        # 2. Input roll number
-        input_field = driver.find_element(By.NAME, "RollNumber")  # Adjust if needed
+    
+        input_field = driver.find_element(By.NAME, "RollNumber")
         input_field.send_keys(roll_no)
         input_field.send_keys(Keys.RETURN)
 
-        # 3. Wait for page to load
+    
         time.sleep(0.5)
 
-        # 4. Extract CGPA (second last matching element)
+        
         cgpa_text = driver.find_element(
             By.XPATH, "(//p[@style='float:right;text-align: right; font-weight:bold;'])[last()-1]"
         ).text.strip()
 
-        cgpa_value = cgpa_text.split('=')[-1].strip()  # Extract "6.81"
+        cgpa_value = cgpa_text.split('=')[-1].strip() 
         print(f"{roll_no}: CGPA = {cgpa_value}")
         return cgpa_value
 
@@ -54,7 +55,7 @@ def get_cgpa(roll_no, year):
 def generate_roll_numbers(year, degree, branch, start=1, end=120):
     roll_numbers = []
     for i in range(start, end + 1):
-        roll_num = f"{i:03d}"  # Pads with zeros, e.g. 001
+        roll_num = f"{i:03d}" 
         roll_id = f"{year}{degree}{branch}{roll_num}"
         roll_numbers.append(roll_id)
     return roll_numbers
@@ -91,7 +92,7 @@ def analyze_and_plot(csv_file='cgpa_results.csv'):
     print("\n--- 📊 Summary Statistics ---")
     print(df['CGPA'].describe())
 
-    # Plot CGPA distribution
+
     plt.figure(figsize=(10, 6))
     sns.histplot(df['CGPA'], bins=20, kde=True, color='skyblue')
     plt.title("CGPA Distribution")
