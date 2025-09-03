@@ -70,7 +70,6 @@ To use the Result Scraper, simply run the application and follow the prompts:
 <div align="center">
 <img src="https://avatars.githubusercontent.com/u/217230820?v=4" width="120" />
 <h3>Knox</h3>
-<p>No information provided.</p>
 </div>
 <br>
 <p align="right">
