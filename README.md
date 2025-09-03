@@ -1,4 +1,8 @@
 # Result Scraper
+
+<img width="1918" height="931" alt="image" src="https://github.com/user-attachments/assets/27b0a5f3-d97a-4e86-993e-45a258a215f1" />
+
+
 ## 🗂️ Description
 
 The Result Scraper is a web scraping tool designed to extract CGPA data from a specific website. It provides a user-friendly interface to input admission year, degree, branch, start and end roll numbers, and the number of parallel threads. The tool then scrapes the CGPA data, generates a CSV file, and displays summary statistics, a histogram of CGPA distribution, and a table of top performers. This project is ideal for users who need to analyze CGPA data for a large number of students.
